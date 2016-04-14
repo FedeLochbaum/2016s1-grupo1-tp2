@@ -1,9 +1,4 @@
-class ConditionPoint_ForNameAndSet < Condition
-    attr_accessor :condition
-
-  def initialize(condition)
-    @condition = condition
-  end
+class ConditionPoint_ForNameAndSet < ConditionPoint
 
   def cumple(a_class,selector)
     selector.to_s.match(@condicion) #aca la condition es el nombre a filtrar.
