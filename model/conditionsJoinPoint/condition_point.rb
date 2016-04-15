@@ -1,10 +1,10 @@
 class ConditionPoint
 
-  def initialize(condition)
-    @condition = condition
+  def initialize(condition_rule)
+    @condition_rule = condition_rule
   end
 
-  def cumple()
+  def satisfy()
 
   end
 

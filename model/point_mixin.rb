@@ -1,35 +1,35 @@
 module Point_Mixin
 
   def affected_classes
-    obtenerTodasLasClases.select {|a_class| algunoCumple a_class}
+    allClasses.select {|klass| anySatisfy klass}
   end
 
-  def algunoCumple(a_class)
+  def anySatisfy(a_class)
     a_class.instance_methods.any? {|selector| affects_method?(a_class,selector)}
   end
 
   def affected_methods
     res = []
-    obtenerTodasLasClases.each {|a_class| agregarSelectoresQueCumplen(a_class,res)}
+    allClasses.each {|klass| addSelectorsSatisfyingCondition(klass, res)}
     res
   end
 
-  def agregarSelectoresQueCumplen(a_class,lista)
-    a_class.instance_methods.each {|selector| agregaSiCumple(selector,a_class,lista)}
+  def addSelectorsSatisfyingCondition(a_class, list_to_fill)
+    a_class.instance_methods.each {|selector| addIfSatisfy(selector, a_class, list_to_fill)}
   end
 
-  def agregaSiCumple(selector,a_class,lista)
+  def addIfSatisfy(selector, a_class, list_to_fill)
     if(affects_method? a_class,selector)
-      lista.push(a_class,selector)
+      list_to_fill.push(a_class,selector)
     end
   end
 
-  def obtenerTodasLasClases
+  def allClasses
     ObjectSpace.each_object(Class)
   end
 
   def affects_method?(a_class,selector)
-    @condition.cumple(a_class,selector)
+    @condition.satisfy(a_class, selector)
   end
 
 end
