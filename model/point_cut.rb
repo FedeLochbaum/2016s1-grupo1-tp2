@@ -1,4 +1,5 @@
-require 'point_mixin'
+require_relative 'point_mixin'
+
 class Point_cut
   include Point_Mixin
 

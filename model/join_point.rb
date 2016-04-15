@@ -1,4 +1,5 @@
-require 'point_mixin'
+require_relative "point_mixin"
+
 class JoinPoint
   include Point_Mixin
 

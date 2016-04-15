@@ -1,4 +1,4 @@
-require 'condition_point'
+require_relative "condition_point"
 
 class ConditionPoint_ForArity < ConditionPoint
 
