@@ -20,7 +20,7 @@ module Point_Mixin
 
   def agregaSiCumple(selector,a_class,lista)
     if(affects_method? a_class,selector)
-      lista.add(a_class,selector)
+      lista.push(a_class,selector)
     end
   end
 
@@ -30,10 +30,6 @@ module Point_Mixin
 
   def affects_method?(a_class,selector)
     @condition.cumple(a_class,selector)
-  end
-
-  def filtrarMetodos(a_class)
-    a_class.instance_methods.select {|selector| @condition.cumple(a_class,selector)}
   end
 
 end
