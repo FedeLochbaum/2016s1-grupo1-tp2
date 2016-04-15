@@ -1,3 +1,5 @@
+require 'condition_point'
+
 class ConditionPoint_ForNameAndSet < ConditionPoint
 
   def cumple(a_class,selector)

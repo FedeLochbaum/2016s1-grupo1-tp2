@@ -1,3 +1,4 @@
+
 cpointArity = ConditionPoint_ForArity.new(5)
 join1 = JoinPoint.new(cpointArity)
 

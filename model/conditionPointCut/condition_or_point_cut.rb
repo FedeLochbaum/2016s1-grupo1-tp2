@@ -1,3 +1,5 @@
+require 'condition_point_cut'
+
 class Condition_or_point_cut < Condition_pointCut
 
   def cumple(a_class,selector)
