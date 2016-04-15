@@ -1,7 +1,7 @@
 module Point_Mixin
 
   def affected_classes
-    obtenerTodasLasClases.filter {|a_class| algunoCumple a_class}
+    obtenerTodasLasClases.select {|a_class| algunoCumple a_class}
   end
 
   def algunoCumple(a_class)
@@ -33,7 +33,7 @@ module Point_Mixin
   end
 
   def filtrarMetodos(a_class)
-    a_class.instance_methods.filter {|selector| @condition.cumple(a_class,selector)}
+    a_class.instance_methods.select {|selector| @condition.cumple(a_class,selector)}
   end
 
 end
