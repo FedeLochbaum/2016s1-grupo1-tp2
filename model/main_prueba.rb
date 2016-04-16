@@ -9,10 +9,10 @@ require_relative 'conditionPointCut/condition_point_cut_or'
 cpointArity = ConditionPointForArity.new(1)
 join1 = JoinPoint.new(cpointArity)
 
-cpointName = ConditionPointStartingWith.new("get")
+cpointName = ConditionPointStartingWith.new("a")
 join2 = JoinPoint.new(cpointName)
 
-list = [join1,join2]
+list = [join2,join1]
 
 conditionCutAnd = ConditionPointCutAnd.new(list)
 cutAnd = Point_cut.new(conditionCutAnd)
