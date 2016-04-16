@@ -1,4 +1,4 @@
-class Condition_pointCut
+class ConditionPointCut
 
 
   def  initialize(joins) #se inicializa con una lista, en el caso de los not, es un join simple

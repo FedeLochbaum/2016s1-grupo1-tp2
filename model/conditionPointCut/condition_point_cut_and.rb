@@ -1,8 +1,8 @@
 require_relative "condition_point_cut"
 
-class Condition_AndPointCut < Condition_pointCut
+class ConditionPointCutAnd < ConditionPointCut
 
-  def cumple(a_class,selector)
+  def satisfy(a_class, selector)
     @joins.all? {|join| join.affects_method? a_class , selector}
   end
 

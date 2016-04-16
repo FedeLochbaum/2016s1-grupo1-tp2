@@ -1,8 +1,8 @@
 require_relative "condition_point"
 
-class ConditionPoint_ForFirstName < ConditionPoint
+class ConditionPointStartingWith < ConditionPoint
 
-  def cumple(a_class,selector)
+  def satisfy(a_class, selector)
     selector.to_s.start_with? @condition
   end
 
