@@ -1,4 +1,5 @@
-class BeforeExecution
+require_relative '../model/when_execution'
+class BeforeExecution < WhenExecution
 
   def execute_code a_class, a_selector, a_block
     case (a_class.instance_method a_selector).arity
