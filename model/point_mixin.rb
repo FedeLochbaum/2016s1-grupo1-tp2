@@ -1,3 +1,4 @@
+require_relative '../model/extra_for_tests/class_and_selector_tuple'
 module Point_Mixin
 
   def affected_classes
@@ -10,7 +11,7 @@ module Point_Mixin
 
   def affected_methods
     res = []
-    allClasses.each {|klass| addSelectorsSatisfyingCondition(klass, res)}
+    affected_classes.each {|klass| addSelectorsSatisfyingCondition(klass, res)}
     res
   end
 
@@ -20,7 +21,7 @@ module Point_Mixin
 
   def addIfSatisfy(selector, a_class, list_to_fill)
     if(affects_method? a_class,selector)
-      list_to_fill.push(a_class,selector)
+      list_to_fill.push(ClassAndSelectorTuple.new a_class,selector)
     end
   end
 
