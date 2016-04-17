@@ -17,7 +17,7 @@ describe 'Aspect' do
 
     conditionForClasses = ConditionPointForClasses.new [Sumador]
     join1 = JoinPoint.new conditionForClasses
-    conditionStartingWith = ConditionPointStartingWith.new "p"
+    conditionStartingWith = ConditionPointStartingWith.new "plus"
     join2 = JoinPoint.new conditionStartingWith
     list = [join1,join2]
     conditionCutAnd = ConditionPointCutAnd.new list

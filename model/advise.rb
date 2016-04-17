@@ -10,7 +10,7 @@ attr_accessor :code, :when_execution
   end
 
   def apply_to a_class,a_selector
-     a_class.extend(ObservatedByAdvise).addObserver(self)
+    # a_class.extend(ObservatedByAdvise).addObserver(self)
      #la idea es hacerlo a traves de observer, falta esta parte por ahora
        new_selector = "#{self}_#{a_selector.to_s}".to_sym
      if not(classIncludeMethod a_class,new_selector)
@@ -20,8 +20,8 @@ attr_accessor :code, :when_execution
      end
   end
 
-  def classIncludeMethod a_class,selector
-    a_class.instance_methods.include? selector
+  def classIncludeMethod a_class,a_selector
+    a_class.private_instance_methods.include? a_selector
   end
 
   def unapply_to a_class,a_selector
