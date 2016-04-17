@@ -16,16 +16,16 @@ describe 'PointCut con varios Join' do
 
     conditionCutAnd = ConditionPointCutAnd.new [join2]
 
-    @PointCut = Point_cut.new conditionCutAnd
+    @PointCut = PointCut.new conditionCutAnd
 
   end
 
   it 'PointCut usa affected_classes devolviendo todas las clases afectadas' do
-    expect(@PointCut.affected_classes).to match_array [Point_cut, JoinPoint]
+    expect(@PointCut.affected_classes).to match_array [PointCut, JoinPoint]
   end
 
   it 'PointCut usa affected_methods devolviendo todos los metodos afectados' do
-    expect(@PointCut.affected_methods).to match_array [Point_cut, :affected_classes, JoinPoint, :affected_classes]
+    expect(@PointCut.affected_methods).to match_array [PointCut, :affected_classes, JoinPoint, :affected_classes]
   end
 
   it 'PointCut usa affected_method? devolviendo si afecta o no al metodo' do

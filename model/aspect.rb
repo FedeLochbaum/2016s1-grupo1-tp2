@@ -1,6 +1,7 @@
+require_relative '../model/advise'
 require_relative '../model/join_point'
 require_relative '../model/point_cut'
-require_relative '../model/advice'
+
 
 class Aspect
 

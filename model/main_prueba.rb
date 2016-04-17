@@ -15,15 +15,15 @@ join2 = JoinPoint.new(cpointName)
 list = [join2,join1]
 
 conditionCutAnd = ConditionPointCutAnd.new(list)
-cutAnd = Point_cut.new(conditionCutAnd)
+cutAnd = PointCut.new(conditionCutAnd)
 
 conditioncutNegado = ConditionPointCutNot.new(join1)
-cutNeg = Point_cut.new(conditioncutNegado)
+cutNeg = PointCut.new(conditioncutNegado)
 
 listOr = [cutNeg,cutAnd]
 
 conditionCutOr = ConditionPointCutOr.new(listOr)
-cutOr = Point_cut.new(conditionCutOr)
+cutOr = PointCut.new(conditionCutOr)
 
 #print (cutAnd.affected_classes)
 #print (cutNeg.affected_methods)
