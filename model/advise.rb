@@ -12,11 +12,12 @@ attr_accessor :code, :when_execution
   def apply_to a_class,a_selector
      a_class.extend(ObservatedByAdvise).addObserver(self)
      #la idea es hacerlo a traves de observer, falta esta parte por ahora
-     new_selector = "#{self}_#{a_selector.to_s}".to_sym
-
-     a_class.send :alias_method, new_selector, a_selector
-     a_class.send :private, new_selector
-     a_class.send :define_method, a_selector, execute_code(a_class, new_selector, code)
+       new_selector = "#{self}_#{a_selector.to_s}".to_sym
+     if not(a_class.instance_methods.include? new_selector)
+       a_class.send :alias_method, new_selector, a_selector
+       a_class.send :private, new_selector
+       a_class.send :define_method, a_selector, execute_code(a_class, new_selector, code)
+     end
   end
 
   def execute_code a_class, a_selector, a_block
