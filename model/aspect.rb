@@ -24,4 +24,12 @@ class Aspect
   def apply_advise_to_methods advise,class_and_method_tuples
     class_and_method_tuples.each {|tuple| advise.apply_to tuple.klass,tuple.selector}
   end
+
+  def unapply
+    advises.each {|adv| unapply_advise_to_methods adv,interest_point.affected_methods}
+  end
+
+  def unapply_advise_to_methods advise,class_and_method_tuples
+    class_and_method_tuples.each {|tuple| advise.unapply_to tuple.klass,tuple.selector}
+  end
 end

@@ -20,6 +20,14 @@ attr_accessor :code, :when_execution
      end
   end
 
+  def unapply_to a_class,a_selector
+    dif = "#{self}_#"
+    str = a_selector.to_s
+    old_selector = (str[dif.chars.length,str.chars.length]).to_sym
+    a_class.send :alias_method, old_selector, a_selector
+    a_class.send :private, old_selector
+  end
+
   def execute_code a_class, a_selector, a_block
     when_execution.execute_code a_class, a_selector, a_block
   end

@@ -31,4 +31,13 @@ describe 'Aspect' do
     @aspect.apply
     expect(@sum.plus 1).to eq 6
   end
+
+  it 'deberia NO afectar al metodo plus de la clase Sumador y al sumar 1 con 1,  dando 2 como resultado ' do
+
+    @aspect.apply
+    expect(@sum.plus 1).to eq 6
+    @aspect.unapply
+    expect(@sum.plus 1).to eq 2
+  end
+
 end
