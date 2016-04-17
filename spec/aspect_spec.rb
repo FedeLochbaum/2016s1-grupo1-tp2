@@ -37,7 +37,7 @@ describe 'Aspect' do
     @aspect.apply
     expect(@sum.plus 1).to eq 6
     @aspect.unapply
-    expect(@sum.plus 1).to eq 2
+    expect(@sum.plus 1).to eq 7
   end
 
 end
