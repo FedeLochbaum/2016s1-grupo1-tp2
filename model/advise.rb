@@ -27,13 +27,11 @@ attr_accessor :code, :when_execution
   def unapply_to a_class,a_selector
     new_selector = "#{self}_#{a_selector.to_s}".to_sym
     if (classIncludeMethod a_class,new_selector)
-      #a_class.send :alias_method, a_selector ,new_selector
+      a_class.send :public, new_selector
+      a_class.send :public, a_selector
+      a_class.send( :define_method, a_selector ,(a_class.send :instance_method , new_selector))
       a_class.send :remove_method, new_selector
 
-      case (a_class.instance_method a_selector).arity
-        when 0  then a_class.send :define_method, a_selector, Proc.new {self.send(a_selector)}
-        when 1  then a_class.send :define_method, a_selector, Proc.new {|x| self.send(a_selector, x)}
-    end
   end
   end
 
