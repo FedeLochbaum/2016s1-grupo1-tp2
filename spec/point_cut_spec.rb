@@ -14,7 +14,7 @@ describe 'PointCut con varios Join' do
     cpointName = ConditionPointStartingWith.new "affected_classes"
     join2 = JoinPoint.new(cpointName)
 
-    conditionCutAnd = ConditionPointCutAnd.new [join2]
+    conditionCutAnd = ConditionPointCutAnd.new [join2,join1]
 
     @PointCut = PointCut.new conditionCutAnd
 
