@@ -25,16 +25,13 @@ attr_accessor :code, :when_execution
   end
 
   def unapply_to a_class,a_selector
-    new_selector = "#{self}_#{a_selector.to_s}".to_sym
-    if (classIncludeMethod a_class,new_selector)
-      a_class.send :public, new_selector
+    methods=(a_class.private_instance_methods).select{|selector| (selector.to_s).end_with?("_#{a_selector.to_s}")}
+
+    if (methods!= [])
+      a_class.send :public, methods[0]
       a_class.send :public, a_selector
-      #a_class.send( :define_method, a_selector ,(a_class.send :instance_method , new_selector))
-      case (a_class.instance_method a_selector).arity
-        when 0 then a_class.send( :define_method, a_selector ,Proc.new {self.send a_selector;})
-        when 1 then a_class.send( :define_method, a_selector ,Proc.new {|x| self.send a_selector, x;})
-      end
-      a_class.send :remove_method, new_selector
+      a_class.send :define_method, a_selector ,(a_class.send :instance_method , methods[0])
+      methods.each {|met|a_class.send :remove_method, met}
 
   end
   end
