@@ -11,7 +11,7 @@ describe 'PointCut con varios Join' do
     cpointArity = ConditionPointForArity.new 0
     join1 = JoinPoint.new(cpointArity)
 
-    cpointName = ConditionPointStartingWith.new "affected_classes"
+    cpointName = ConditionPointStartingWith.new "affec"
     join2 = JoinPoint.new(cpointName)
 
     conditionCutAnd = ConditionPointCutAnd.new [join2,join1]
@@ -25,7 +25,7 @@ describe 'PointCut con varios Join' do
   end
 
   it 'PointCut usa affected_methods devolviendo todos los metodos afectados' do
-    expect(@PointCut.affected_methods).to match_array [PointCut, :affected_classes, JoinPoint, :affected_classes]
+    expect(@PointCut.affected_methods).to match_array [:affected_classes, :affected_classes, :affected_methods, :affected_methods, :affected_methodsAndClasses, :affected_methodsAndClasses]
   end
 
   it 'PointCut usa affected_method? devolviendo si afecta o no al metodo' do

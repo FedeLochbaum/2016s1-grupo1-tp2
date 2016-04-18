@@ -19,14 +19,14 @@ class Aspect
     end
   end
   def apply
-    advises.each {|adv| apply_advise_to_methods adv,interest_point.affected_methods}
+    advises.each {|adv| apply_advise_to_methods adv,interest_point.affected_methodsAndClasses}
   end
   def apply_advise_to_methods advise,class_and_method_tuples
     class_and_method_tuples.each {|tuple| advise.apply_to tuple.klass,tuple.selector}
   end
 
   def unapply
-    advises.each {|adv| unapply_advise_to_methods adv,interest_point.affected_methods}
+    advises.each {|adv| unapply_advise_to_methods adv,interest_point.affected_methodsAndClasses}
   end
 
   def unapply_advise_to_methods advise,class_and_method_tuples

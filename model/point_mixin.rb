@@ -10,6 +10,10 @@ module Point_Mixin
   end
 
   def affected_methods
+    res = affected_methodsAndClasses.map {|tuple| tuple.selector}
+  end
+
+  def affected_methodsAndClasses
     res = []
     affected_classes.each {|klass| addSelectorsSatisfyingCondition(klass, res)}
     res
