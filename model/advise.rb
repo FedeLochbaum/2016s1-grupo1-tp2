@@ -27,7 +27,7 @@ attr_accessor :code, :when_execution
   def unapply_to a_class,a_selector
     methods=(a_class.private_instance_methods).select{|selector| (selector.to_s).end_with?("_#{a_selector.to_s}")}
 
-    if (methods!= [])
+    if (not methods.empty?)
       a_class.send :public, methods[0]
       a_class.send :public, a_selector
       a_class.send :define_method, a_selector ,(a_class.send :instance_method , methods[0])
