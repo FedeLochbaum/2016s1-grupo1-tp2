@@ -11,6 +11,7 @@ module Point_Mixin
 
   def affected_methods
     res = affected_methodsAndClasses.map {|tuple| tuple.selector}
+    res
   end
 
   def affected_methodsAndClasses
