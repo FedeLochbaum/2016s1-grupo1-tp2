@@ -1,6 +1,10 @@
 require_relative '../../model/join_point'
 require_relative '../../model/conditionsJoinPoint/condition_point_for_descendants'
 require_relative '../../model/conditionsJoinPoint/condition_point_for_classes'
+require_relative '../../model/conditionPointCut/condition_point_cut_or'
+require_relative '../../model/conditionPointCut/condition_point_cut_and'
+require_relative '../../model/conditionsJoinPoint/conditionPoint_ForNameAndSet'
+require_relative '../../model/conditionsJoinPoint/condition_point_starting_with'
 
 def joinPoint
   JoinPointBuilder.new
@@ -8,10 +12,10 @@ end
 def advise
   AdviseBuilder.new
 end
-def in(*words)
+def inn(*words)
   ConditionPointMatchingName.new words
 end
-def starting_with word
+def starting_withh word
   ConditionPointStartingWith.new word
 end
 class AdviseBuilder
@@ -46,7 +50,9 @@ class JoinPointBuilder
   end
 
   def or_descendats
-    @joinPoint.condition = ConditionPointForDescendants.new @klasses
+    condition1 = JoinPoint.new @joinPoint.condition
+    condition2 = JoinPoint.new ConditionPointForDescendants.new @klasses
+    @joinPoint.condition = ConditionPointCutOr.new [condition1,condition2]
     self
   end
 
@@ -55,8 +61,10 @@ class JoinPointBuilder
   end
 
   def methods condition
-    @joinPoint.condition =condition
-    @joinPoint.affected_methods
+    condition1 = JoinPoint.new @joinPoint.condition
+    condition2 = JoinPoint.new condition
+    @joinPoint.condition = ConditionPointCutAnd.new [condition1,condition2]
+    all_methods
   end
 #Estos dos puede ir aca o en JoinPoint , segun que decidamos que hacen los demas metodos que tenemos dudas.
   def or joinPoint

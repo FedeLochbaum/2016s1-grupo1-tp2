@@ -19,11 +19,20 @@ describe 'Condition @conditionForDescendants' do
   end
 
   it 'creacion de un joinPoint de descendencia con el Dsl' do
-    methodsDescendats=joinPoint.for_class(Array).or_descendats.all_methods
-    expect(methodsDescendats.size).to eq 68210
+    methodsDescendats=joinPoint.for_class(Integer).or_descendats.all_methods
+    expect(methodsDescendats.size).to eq 64721
+  end
 
-    #methodsDescendatsWithIn=joinPoint.for_class(JoinPoint).or_descendats.methods #in ("foo", "bar") #falta resolver esto
-    #expect(methodsDescendatsWithIn.size).to eq 63309
+  it 'creacion de un joinPoint con starting with' do
+
+    methodsDescendatsWithStartingWith = joinPoint.for_class(Integer).or_descendats.methods starting_withh("foo")
+    expect(methodsDescendatsWithStartingWith.size).to eq 0
+  end
+
+  it 'creacion de un joinPoint con in' do
+
+    methodsDescendatsWithIn=joinPoint.for_class(Integer).or_descendats.methods inn("foo", "bar") #falta resolver esto
+    expect(methodsDescendatsWithIn.size).to eq 0
   end
 
 
