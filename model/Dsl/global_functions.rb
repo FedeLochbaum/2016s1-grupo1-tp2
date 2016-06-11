@@ -23,6 +23,28 @@ class AdviseBuilder
 
   def initialize
     @advise= Advise.new nil,nil
+    @aspect=Aspect.new nil,nil
+  end
+
+  def declare &block
+    instance_eval &block
+    @aspect.addIfNotNil @advise
+    @aspect.apply
+  end
+  def before &block
+     @advise.when_execution = BeforeExecution.new
+     @aspect.interest_point = instance_eval(&block)
+  end
+  def after &block
+    @advise.when_execution = AfterExecution.new
+    @aspect.interest_point = instance_eval(&block)
+  end
+  def execute &block
+    @advise.code = Proc.new &block
+  end
+
+  def for_class a_class
+    joinPoint.for_class a_class
   end
 
 
