@@ -1,4 +1,7 @@
 require_relative '../../model/join_point'
+require_relative '../../model/advise'
+require_relative '../../model/point_cut'
+require_relative '../../model/aspect'
 require_relative '../../model/conditionsJoinPoint/condition_point_for_descendants'
 require_relative '../../model/conditionsJoinPoint/condition_point_for_classes'
 require_relative '../../model/conditionPointCut/condition_point_cut_or'
@@ -29,7 +32,7 @@ class AdviseBuilder
   def declare &block
     instance_eval &block
     @aspect.addIfNotNil @advise
-    @aspect.apply
+    @aspect
   end
   def before &block
      @advise.when_execution = BeforeExecution.new
@@ -53,9 +56,16 @@ end
 class JoinPointBuilder
   attr_accessor :joinPoint,:klasses
 
+
   def initialize
     @joinPoint = JoinPoint.new nil
   end
+  #def in(*words)
+  #  ConditionPointMatchingName.new words
+  #end
+  #def starting_with word
+  #  ConditionPointStartingWith.new word
+  #end
 
   def any_class
     for_class Class
@@ -79,22 +89,22 @@ class JoinPointBuilder
   end
 
   def all_methods
-    @joinPoint.affected_methods
+    self
   end
 
   def methods condition
     condition1 = JoinPoint.new @joinPoint.condition
     condition2 = JoinPoint.new condition
     @joinPoint.condition = ConditionPointCutAnd.new [condition1,condition2]
-    all_methods
-  end
-#Estos dos puede ir aca o en JoinPoint , segun que decidamos que hacen los demas metodos que tenemos dudas.
-  def or joinPoint
-     PoinCut.new ConditionPointCutOr @joinPoint,joinPoint
+    self
   end
 
-  def and joinPoint
-    PoinCut.new ConditionPointCutAnd @joinPoint,joinPoint
+  def orr joinPointBuilder
+     PointCut.new (ConditionPointCutOr.new [@joinPoint,joinPointBuilder.joinPoint])
+  end
+
+  def and joinPointBuilder
+    PointCut.new (ConditionPointCutAnd.new [@joinPoint,joinPointBuilder.joinPoint])
   end
 
 

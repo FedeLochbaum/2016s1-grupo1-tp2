@@ -16,14 +16,4 @@ describe 'Condition forClasses' do
     expect(@joinPoint.satisfy(String,:to_yaml)).to be false
   end
 
-  it 'test de joinPoint de dsl ' do
-    methodsAnyClass = joinPoint.any_class.all_methods
-    expect(methodsAnyClass.size).to eq 64083
-
-    methodsClass = joinPoint.for_class(Integer).all_methods
-    expect(methodsClass.size).to eq 64194
-
-    methodsClasses = joinPoint.for_classes([JoinPoint, Integer]).all_methods
-    expect(methodsClasses.size).to eq 64204
-  end
 end
