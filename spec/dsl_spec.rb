@@ -28,19 +28,31 @@ describe 'My behaviour' do
 
   it 'creacion de un joinPoint de descendencia con el Dsl' do
     joinPointVar=joinPoint.for_class(Integer).or_descendats.all_methods.joinPoint
-    expect(joinPointVar.affected_methods.size).to be_between 0,40000
+    expect(joinPointVar.affected_methods.size).to be_between 0,66000
   end
 
   it 'creacion de un joinPoint con starting with' do
 
     joinPointVar = (joinPoint.for_class(Integer).or_descendats.methods starting_withh("int")).joinPoint
-    expect(joinPointVar.affected_methods.size).to eq 7
+    expect(joinPointVar.affected_methods.size).to eq 8
   end
 
   it 'creacion de un joinPoint con in' do
 
     joinPointVar=(joinPoint.for_class(Integer).or_descendats.methods inn("times", "succ")).joinPoint
-    expect(joinPointVar.affected_methods.size).to eq 11
+    expect(joinPointVar.affected_methods.size).to eq 13
+  end
+
+  it 'creacion de un PointCut con or' do
+
+    pointCutVar= joinPoint.for_class(Sumador).all_methods.OR joinPoint.for_class(Sumador).methods starting_withh("plus")
+    expect(pointCutVar.affected_methods.size).to be_between 0 ,65000
+  end
+
+  it 'creacion de un PointCut con and' do
+
+    pointCutVar= joinPoint.for_class(Sumador).all_methods.AND joinPoint.for_class(Sumador).methods starting_withh("plus")
+    expect(pointCutVar.affected_methods.size).to eq 1
   end
 
   it 'creacion de aspecto con before' do
@@ -48,7 +60,7 @@ describe 'My behaviour' do
     aspect=
         advise.declare do
           before do
-            for_class(Sumador).all_methods.orr for_class(Sumador).methods starting_withh("plus")
+            for_class(Sumador).all_methods.OR for_class(Sumador).methods starting_withh("plus")
           end
           execute do
             @sum.mul 2

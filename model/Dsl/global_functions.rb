@@ -56,7 +56,6 @@ end
 class JoinPointBuilder
   attr_accessor :joinPoint,:klasses
 
-
   def initialize
     @joinPoint = JoinPoint.new nil
   end
@@ -99,13 +98,14 @@ class JoinPointBuilder
     self
   end
 
-  def orr joinPointBuilder
+  def OR joinPointBuilder
      PointCut.new (ConditionPointCutOr.new [@joinPoint,joinPointBuilder.joinPoint])
   end
 
-  def and joinPointBuilder
-    PointCut.new (ConditionPointCutAnd.new [@joinPoint,joinPointBuilder.joinPoint])
-  end
+ def AND joinPointBuilder
+   PointCut.new (ConditionPointCutAnd.new [@joinPoint,joinPointBuilder.joinPoint])
+ end
+
 
 
 end
