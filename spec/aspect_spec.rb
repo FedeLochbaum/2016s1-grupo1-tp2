@@ -6,6 +6,7 @@ require_relative '../model/extra_for_tests/sumador'
 require_relative '../model/advise'
 require_relative '../model/aspect'
 require_relative '../model/point_cut'
+require_relative '../model/Dsl/global_functions'
 require_relative '../model/join_point'
 describe 'Aspect' do
 
@@ -14,6 +15,7 @@ describe 'Aspect' do
     code= Proc.new {@sum.mul 2}
     advise_before=Advise.new code,BeforeExecution.new
     advise_after=Advise.new code,AfterExecution.new
+
 
     conditionForClasses = ConditionPointForClasses.new [Sumador]
     join1 = JoinPoint.new conditionForClasses

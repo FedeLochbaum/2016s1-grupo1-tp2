@@ -8,6 +8,7 @@ require_relative '../../model/conditionPointCut/condition_point_cut_or'
 require_relative '../../model/conditionPointCut/condition_point_cut_and'
 require_relative '../../model/conditionsJoinPoint/conditionPoint_ForNameAndSet'
 require_relative '../../model/conditionsJoinPoint/condition_point_starting_with'
+require_relative '../../model/conditionPointCut/condition_point_cut_not'
 
 def joinPoint
   JoinPointBuilder.new
@@ -15,14 +16,14 @@ end
 def advise
   AdviseBuilder.new
 end
-def inn(*words)
+def inn *words
   ConditionPointMatchingName.new words
 end
 def starting_withh word
   ConditionPointStartingWith.new word
 end
 class AdviseBuilder
-  attr_accessor :advise
+  attr_accessor :advise,:aspect
 
   def initialize
     @advise= Advise.new nil,nil
@@ -98,13 +99,14 @@ class JoinPointBuilder
     self
   end
 
-  def OR joinPointBuilder
+  def | (joinPointBuilder)
      PointCut.new (ConditionPointCutOr.new [@joinPoint,joinPointBuilder.joinPoint])
   end
 
- def AND joinPointBuilder
+  def & joinPointBuilder
    PointCut.new (ConditionPointCutAnd.new [@joinPoint,joinPointBuilder.joinPoint])
- end
+  end
+
 
 
 
