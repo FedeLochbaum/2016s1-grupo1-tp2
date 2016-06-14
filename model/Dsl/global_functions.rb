@@ -16,10 +16,10 @@ end
 def advise
   AdviseBuilder.new
 end
-def inn *words
+def In *words
   ConditionPointMatchingName.new words
 end
-def starting_withh word
+def startingWith word
   ConditionPointStartingWith.new word
 end
 class AdviseBuilder

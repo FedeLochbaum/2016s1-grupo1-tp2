@@ -29,13 +29,13 @@ describe 'My behaviour' do
 
   it 'creacion de un joinPoint con starting with' do
 
-    joinPointVar = (joinPoint.for_class(Integer).or_descendats.methods starting_withh("int")).joinPoint
+    joinPointVar = (joinPoint.for_class(Integer).or_descendats.methods startingWith("int")).joinPoint
     expect(joinPointVar.affected_methods.size).to eq 8
   end
 
   it 'creacion de un joinPoint con in' do
 
-    joinPointVar=(joinPoint.for_class(Integer).or_descendats.methods inn("times", "succ")).joinPoint
+    joinPointVar=(joinPoint.for_class(Integer).or_descendats.methods In("times", "succ")).joinPoint
     expect(joinPointVar.affected_methods.size).to eq 13
   end
 
@@ -44,7 +44,7 @@ describe 'My behaviour' do
     pointCutVar= joinPoint.for_class(Sumador)
                      .all_methods |
                       (joinPoint.for_class(Sumador)
-                           .methods starting_withh("plus"))
+                           .methods startingWith("plus"))
     expect(pointCutVar.affected_methods.size).to be_between 0 ,65000
   end
 
@@ -53,7 +53,7 @@ describe 'My behaviour' do
     pointCutVar= joinPoint.for_class(Sumador)
                      .all_methods &
                       (joinPoint.for_class(Sumador)
-                           .methods starting_withh("plus"))
+                           .methods startingWith("plus"))
     expect(pointCutVar.affected_methods.size).to eq 1
   end
 
@@ -63,7 +63,7 @@ describe 'My behaviour' do
     aspect=
         advise.declare do
           before do
-            for_class(Sumador).all_methods & (for_class(Sumador).methods starting_withh("plus"))
+            for_class(Sumador).all_methods & (for_class(Sumador).methods startingWith("plus"))
           end
           execute do
             sum.mul 2
