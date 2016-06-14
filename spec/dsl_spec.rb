@@ -11,10 +11,6 @@ require_relative '../model/point_cut'
 require_relative '../model/join_point'
 describe 'My behaviour' do
 
-  before :each do
-    @sum=Sumador.new 1
-  end
-
   it 'test de joinPoint de dsl ' do
     joinPointVar = joinPoint.any_class.all_methods.joinPoint
     expect(joinPointVar.affected_methods.size).to be_between 0 ,65000
@@ -63,19 +59,20 @@ describe 'My behaviour' do
 
 
   it 'creacion de aspecto con before' do
+    sum = Sumador.new 1
     aspect=
         advise.declare do
           before do
             for_class(Sumador).all_methods & (for_class(Sumador).methods starting_withh("plus"))
           end
           execute do
-            @sum.mul 2
+            sum.mul 2
           end
         end
 
     aspect.apply
 
-    expect(@sum.plus 1).to eq 3
+    expect(sum.plus 1).to eq 3
 
   end
 
