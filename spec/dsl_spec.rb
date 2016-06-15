@@ -57,7 +57,6 @@ describe 'My behaviour' do
     expect(pointCutVar.affected_methods.size).to eq 1
   end
 
-
   it 'creacion de aspecto con before' do
     sum = Sumador.new 1
     aspect=
@@ -65,14 +64,32 @@ describe 'My behaviour' do
           before do
             for_class(Sumador).all_methods & (for_class(Sumador).methods startingWith("plus"))
           end
-          execute do
-            sum.mul 2
+          execute do |x|
+            4 * x
           end
         end
 
     aspect.apply
 
-    expect(sum.plus 1).to eq 3
+    expect(sum.plus 1).to eq 5
+
+  end
+
+  it 'creacion de aspecto con after' do
+    sum = Sumador.new 1
+    aspect=
+        advise.declare do
+          after do
+            for_class(Sumador).all_methods & (for_class(Sumador).methods startingWith("plus"))
+          end
+          execute do |x|
+            4 * x
+          end
+        end
+
+    aspect.apply
+
+    expect(sum.plus 1).to eq 8
 
   end
 
